@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Games>
+@{
+    ViewData["Title"] = "NewAdvert";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section>
+    <div class="container">
+        <div class="row">
+            @foreach (var game in Model)
+            {
+            <div class="col-lg-3 col-md-6">
+                <div class="game-card">
+                    <a href="/İlan/Yeni/Bilgiler/@game.ID"><img class="game-card-img" src="/img/game/@game.Img" alt="@game.Name" ></a>
+                </div>
+            </div>
+            }
+       
+        </div>
+    </div>
+</section>
+<script>
+    $(function () {
+        $(".single-select").removeAttr("multiple");
+    });
+</script>

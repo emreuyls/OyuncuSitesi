@@ -1,0 +1,43 @@
+﻿@model IEnumerable<AdvertListModelView>
+@{
+    ViewData["Title"] = "Advert";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-md-10">
+
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Oyun Adı</th>
+                            <th scope="col">Nick</th>
+                            <th scope="col">Oluşturulma Tarihi</th>
+                            <th scope="col">-</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var advert in Model)
+                        {
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>@advert.Game</td>
+                            <td>@advert.Nick</td>
+                            <td>@advert.AdDate</td>
+                            <td><a href="/ilan/düzenle/@advert.ID" class="badge badge-info"><span class="fas fa-edit"></span>Düzenle</a></td>
+                            @*<td><a href="#"><span class="fas fa-edit"></span></a><i class="fas fa-trash-alt"></i></td>*@
+                        </tr>
+                        }
+                        </tbody>
+                </table>
+
+            </div>
+            <div class="col-lg-2 col-md-2">
+                <a href="/ilan/Yeni" class="btn btn-success btn-block">Yeni İlan Ver</a>
+            </div>
+        </div>
+    </div>
+</section>

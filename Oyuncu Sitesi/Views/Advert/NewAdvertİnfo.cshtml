@@ -1,0 +1,107 @@
+﻿@model AdvertModelView
+@{
+    ViewData["Title"] = "NewAdvertİnfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/select2/select2.min.css" rel="stylesheet" />
+<script src="~/js/select2/select2.min.js"></script>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <form id="newAdvert" asp-action="NewAdvertİnfo" method="post">
+                    <div id="validation" asp-validation-summary="All"></div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Oyun İçi Nick</label>
+                        <input asp-for="Nick" class="form-control" placeholder="Nick..." />
+                        <span asp-validation-for="Nick" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Mevcut Rütben</label>
+                        <select asp-for="Rank" asp-items="ViewBag.RankBag" class="form-control">
+                            <option disabled selected>Rank Şeçiniz</option>
+                        </select>
+                        <span asp-validation-for="Rank" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Aradığın Rütbe</label>
+                        <select asp-for="SeekRank" asp-items="ViewBag.RankBag" class="form-control select-roles">
+                         
+                        </select>
+                        <span asp-validation-for="SeekRank" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Mevcut Rol</label>
+                        <select class="select-roles form-control" asp-for="Role" asp-items="ViewBag.RolesBag">
+                            <option disabled selected>Rol Şeçiniz</option>
+
+                        </select>
+                        <span asp-validation-for="Role" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Aradığın Rol</label>
+                        <select class="select-roles form-control" asp-for="SeekRole" asp-items="ViewBag.RolesBag" multiple="multiple">
+                        </select>
+                        <span asp-validation-for="SeekRole" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="formControlRange">Aradığın En Düşük Yaş</label>
+
+                        <input asp-for="MinAge" type="range" value="18" min="7" max="60" class="form-control-range date-range" /><p> Yaş: <span id="range-text" class="badge badge-secondary">18</span></p>
+                        <span asp-validation-for="MinAge" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Detaylı Bilgi</label>
+                        <textarea asp-for="Content" class="form-control" rows="5"></textarea>
+                        <span asp-validation-for="Content" class="text-danger"></span>
+                    </div>
+                    <input type="hidden" value="@ViewBag.GameID" name="id" id="id" />
+                    <input type="submit" class="btn btn-success">
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $(document).on('input', '.date-range', function () {
+        $('#range-text').html($(this).val());
+    })
+    $(document).ready(function () {
+        $('.select-roles').select2();
+    });
+    
+        $('#newAdvert').on('submit', function (e) {
+            e.preventDefault()
+            var form = $(this).serialize()
+            $.ajax({
+                url: "/İlan/Yeni/Bilgiler/",
+                type: "POST",
+                data: form,
+                dataType: "json",
+                data: $("#newAdvert").serialize(),
+                success: function (data) {
+                    if (data.success) {
+                        location.reload();
+                        toastr.success(data.message, 'Başarılı', { timeOut: 5000, positionClass: "toast-top-right", progressBar: true })
+                    }
+                    else {
+                        
+                        var json = $.parseJSON(data.test);
+                        toastr.error(data.message, 'Bir Sorun Oluştu', { timeOut: 5000, positionClass: "toast-top-right", progressBar: true })              
+                        displayValidationErrors(json);
+                        
+                    }
+                }
+            });
+            function displayValidationErrors(errors) {
+                $.each(errors, function (idx, validationError) {
+                    $("span[data-valmsg-for='" + validationError.PropertyName + "']").text(validationError.ErrorList[0]);
+                    //TODO: errorlar kalıcı ve sayfa reload atıyor yönlendirme işini yap
+                });
+            }
+        });
+</script>

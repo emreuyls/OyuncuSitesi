@@ -1,0 +1,60 @@
+﻿@model IEnumerable<GameAdvertListModelView>
+@{
+    ViewData["Title"] = "GameProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section>
+    @foreach (var game in Model)
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="game-card">
+                        <div class="game-header">
+                            <div class="game-img">
+                                <img src="/img/game/@game.Img" alt="@game.Name" srcset="">
+                            </div>
+                            <div class="game-info">
+                                <h5>@game.Name</h5>
+                                <p>
+                                    @game.Description
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <table class="table table-hover ">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nick</th>
+                                <th scope="col">Yaş Kıriteri</th>
+                                <th scope="col">Rütbesi</th>
+                                <th scope="col">bişiler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var advert in game.Advert)
+                            {
+                                <tr>
+                                        <td><a href="/ilan/@advert.ID">@advert.Nick</a></td>
+                                        <td>@advert.MinAge</td>
+
+                                        @foreach (var item in ViewBag.Ranklist)
+                                        {
+                                            @if (advert.Rank == item.ID.ToString())
+                                            {
+                                                <td>@item.Ranks</td>
+                                            }
+                                        }
+                                        <td>bişiler</td>                                    
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+</section>

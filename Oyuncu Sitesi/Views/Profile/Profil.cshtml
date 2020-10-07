@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewData["Title"] = "Profil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="test col-lg-3 col-md-4 col-6">
+                <div class="profile-img">
+                    <img src="/img/profile1.jpeg" alt="profile">
+                </div>
+            </div>
+            <div class="col-lg 9">
+                <div class="profile-head">
+                    <h3>Yener Eyşi</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> İstanbul</p>
+                    <h6>Rütbe</h6>
+                    <a class="btn btn-warning"><i class="far fa-envelope"></i>Mesaj Yolla</a>
+                </div>
+                <div class="profile-body">
+                    <!-- Nav tabs -->
+
+                    <div id="jquery-tabs" style="width:auto">
+
+                        <div id="tabs-nav">
+                            <a href="#tab0" class="tabs-menu tabs-menu-active">Hakkında</a>
+                            <a href="#tab1" class="tabs-menu">Hesaplar</a>
+                        </div>
+
+                        <div class="tabs-container">
+                            <div id="tab0" class="tabs-panel" style="display:block">
+                                <div class="profile-about">
+                                    <ul>
+                                        <li>
+                                            <span>Adı Soyadı:</span>
+                                            <span>Yavşak Yener</span>
+                                        </li>
+                                        <li>
+                                            <span>Doğum Tarihi:</span>
+                                            <span>01.01.2001</span>
+                                        </li>
+                                        <li>
+                                            <span>Varsa Diğer Bilgiler:</span>
+                                            <span>Kızlı Anime Sevici</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div id="tab1" class="tabs-panel">
+                                <div class="profile-account">
+                                    <ul>
+                                        <li>
+                                            <a href="#">Tinder</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Steam</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Discord</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+        $(function () {
+            $("#tabs-nav a").click(function () {
+                $("#tabs-nav a").removeClass("tabs-menu-active");
+                $(this).addClass("tabs-menu-active");
+                $(".tabs-panel").hide();
+                var tab_id = $(this).attr("href");
+                $(tab_id).fadeIn();
+                return false;
+            });
+        });
+</script>

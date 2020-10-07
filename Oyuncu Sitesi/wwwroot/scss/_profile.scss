@@ -1,0 +1,52 @@
+$backgroundcolor: #252a34;
+$linkColor: #eaeaea;
+$linkColorHover: #08d9d6;
+.profile-img {
+  width: 100%;
+  height: 300px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+#tabs-nav {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  text-align: left;
+}
+a.tabs-menu {
+  display: inline-block;
+  background-color: $backgroundcolor;
+  font-size: 15px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #fff;
+  padding: 5px 10px;
+  text-shadow: 1px 1px 0px $backgroundcolor;
+  font-weight: bold;
+  text-decoration: none;
+  border: solid 1px $backgroundcolor;
+  border-bottom: 0;
+  border-radius: 0 20px 0 0;
+}
+a.tabs-menu.tabs-menu-active {
+  background-color: #fff;
+  text-shadow: 1px 1px 0px #ffffff;
+  border: solid 1px $backgroundcolor;
+  color: #6b6b6b;
+  border-bottom: 0;
+}
+.tabs-container {
+  border: solid 1px $backgroundcolor;
+  margin-top: -1px;
+  background-color: #fff;
+  overflow: hidden;
+}
+.tabs-panel {
+  display: none;
+  min-height: 150px;
+  overflow: auto;
+  padding: 10px;
+  max-height: 200px;
+}
