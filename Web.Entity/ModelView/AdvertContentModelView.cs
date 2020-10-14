@@ -28,7 +28,7 @@ namespace Web.Entity.ModelView
     {
         public string Username { get; set; }
         public bool Gender { get; set; }
-
+        public DateTime BirthDate { get; set; }
         public string Img { get; set; }
     }
 

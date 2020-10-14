@@ -1,16 +1,14 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Web.Entity
+namespace Web.Entity.ModelView
 {
-   public class ApplicationUser:IdentityUser
+  public class ProfileModelView
     {
+        public string Username { get; set; }
         public string Names { get; set; }
-        public Guid GuidId { get; set; }
         public DateTime RegisterDate { get; set; }
-        public bool isCheck { get; set; }
         public bool Gender { get; set; }
         public DateTime Birthdate { get; set; }
         public string Image { get; set; }
@@ -24,5 +22,6 @@ namespace Web.Entity
         public string XboxLink { get; set; }
         public string Discord { get; set; }
         public string TeamSpeak { get; set; }
+
     }
 }

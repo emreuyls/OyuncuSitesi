@@ -1,0 +1,130 @@
+﻿@model PlatformSettingModelView
+@{
+    ViewData["Title"] = "Ayarlar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <ul class="nav flex-column">
+                    @await Html.PartialAsync("_SettingMenu")
+                </ul>
+            </div>
+            <div class="col-lg-9">
+                <form asp-action="PlatformSetting" method="post" id="form-platform">
+                    <h5>İletişim Kanalları</h5>
+                    <hr>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Discord</label>
+                        <div class="input-group col-sm-10">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Http://</div>
+                            </div>
+                            <input class="form-control" asp-for="Discord" placeholder="Discord Link">
+                        </div>                      
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Team Speak</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" asp-for="TeamSpeak">
+                            <span asp-validation-for="TeamSpeak" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <h5>Oyun Platformları</h5>
+                    <hr>
+                    <div class="form-group row">
+                        <label  class="col-sm-2 col-form-label">Steam</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" asp-for="Steam">
+                            <span asp-validation-for="Steam" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Origins</label>
+                        <div class="col-sm-10">
+                            <input asp-for="Origin" class="form-control">
+                            <span asp-validation-for="Origin" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">BattleNet</label>
+                        <div class="col-sm-10">
+                            <input asp-for="BattleNet" class="form-control">
+                            <span asp-validation-for="BattleNet" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label  class="col-sm-2 col-form-label">Epic Games</label>
+                        <div class="col-sm-10">
+                            <input asp-for="EpicGames" class="form-control">
+                            <span asp-validation-for="EpicGames" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Xbox</label>
+                        <div class="col-sm-10">
+                            <input asp-for="Xbox" class="form-control">
+                            <span asp-validation-for="Xbox" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label  class="col-sm-2 col-form-label">Playstation Network</label>
+                        <div class="col-sm-10">
+                            <input asp-for="Psn" class="form-control">
+                            <span asp-validation-for="Psn" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Kayıt Et</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $('#form-platform').on('submit', function (e) {
+        e.preventDefault()
+        var form = $(this).serialize()
+        $.ajax({
+            url: "/ayarlar/platform",
+            type: "POST",
+            data: form,
+            dataType: "json",
+            data: $("#form-platform").serialize(),
+            success: function (data) {
+                if (data.success) {
+                    toastr.success(data.message, 'Başarılı', { timeOut: 5000, positionClass: "toast-top-right", progressBar: true })
+                    $(".validation-summary-valid").find("li").remove();
+                    $("span[data-valmsg-for").html("");
+                }
+                else {
+                    toastr.error(data.message, 'Bir Sorun Oluştu', { timeOut: 5000, positionClass: "toast-top-right", progressBar: true })
+                    $(".validation-summary-valid").find("li").remove();
+                    if (data.errors != null) {
+                        var customerror = $.parseJSON(data.errors);
+                        displayCustomValidationErrors(customerror);
+                    }
+                    if (data.error != null) {
+                        var error = $.parseJSON(data.error);
+                        displayValidationErrors(error);
+                    }
+
+                }
+            }
+        });
+        function displayCustomValidationErrors(errors) {
+            $.each(errors, function (id, validationError) {
+                $(".validation-summary-valid").children("ul").append("<li>'" + validationError.Message + "'</li>");
+                //TODO: errorlar kalıcı ve sayfa reload atıyor yönlendirme işini yap
+            });
+        }
+        function displayValidationErrors(errors) {
+            $("span[data-valmsg-for").html("");
+            $.each(errors, function (idx, validationError) {
+                $("span[data-valmsg-for='" + validationError.PropertyName + "']").text(validationError.ErrorList[0]);
+                //TODO: errorlar kalıcı ve sayfa reload atıyor yönlendirme işini yap
+            });
+        }
+    });
+</script>

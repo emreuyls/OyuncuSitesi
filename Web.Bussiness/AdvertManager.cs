@@ -208,7 +208,7 @@ namespace Web.Business
             {
                 ContentAdvert=new ContentAdvert{AdDate=advert.AdDate,MinAge=advert.MinAge,Content=advert.Content,Nick=advert.Nick,Rank=advert.Rank,Role=advert.Role},
                 ContentGame=new ContentGame { Description=advert.Games.Description,Img=advert.Games.Img,Name=advert.Games.Name,ID=advert.Games.ID},
-                ContentUser=new ContentUser {Username=user.Result.UserName,Gender=user.Result.Gender,Img=user.Result.Image}
+                ContentUser=new ContentUser {Username=user.Result.UserName,Gender=user.Result.Gender,Img=user.Result.Image,BirthDate=user.Result.Birthdate}
                 
             };
             List<int> seekRole = new List<int>();

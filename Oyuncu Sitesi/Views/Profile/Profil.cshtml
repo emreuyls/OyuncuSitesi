@@ -1,4 +1,4 @@
-﻿
+﻿@model ProfileModelView
 @{
     ViewData["Title"] = "Profil";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,10 +14,14 @@
             </div>
             <div class="col-lg 9">
                 <div class="profile-head">
-                    <h3>Yener Eyşi</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> İstanbul</p>
+                    <h3>@Model.Username</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> @Model.City</p>
                     <h6>Rütbe</h6>
                     <a class="btn btn-warning"><i class="far fa-envelope"></i>Mesaj Yolla</a>
+                    @if(User.Identity.Name==Model.Username)
+                    {
+                    <a href="/ayarlar" class="btn btn-warning"><i class="far fa-envelope"></i>Ayarlar</a>
+                    }
                 </div>
                 <div class="profile-body">
                     <!-- Nav tabs -->
@@ -35,11 +39,11 @@
                                     <ul>
                                         <li>
                                             <span>Adı Soyadı:</span>
-                                            <span>Yavşak Yener</span>
+                                            <span>@Model.Names</span>
                                         </li>
                                         <li>
                                             <span>Doğum Tarihi:</span>
-                                            <span>01.01.2001</span>
+                                            <span>@Model.Birthdate</span>
                                         </li>
                                         <li>
                                             <span>Varsa Diğer Bilgiler:</span>

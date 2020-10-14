@@ -39,7 +39,11 @@ namespace Oyuncu_Sitesi
                 options.Password.RequireUppercase = false;
                 options.User.RequireUniqueEmail = true;
                 //TODO:eposte tek olsun diyince hata veriyor çöz onu
-            }).AddEntityFrameworkStores<ApplicationIdentityDbContext>().AddDefaultTokenProviders().AddErrorDescriber<CustomIdentityError>();          
+            }).AddEntityFrameworkStores<ApplicationIdentityDbContext>().AddDefaultTokenProviders().AddErrorDescriber<CustomIdentityError>();
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/login";
+            });
             services.AddControllersWithViews();
             services.AddTransient<IUnitOfWork, EFUnitOfWork>();
             services.AddTransient<IGameRepository, EFGameRepository>();
