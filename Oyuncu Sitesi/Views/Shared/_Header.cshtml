@@ -1,13 +1,16 @@
-﻿
-<nav class="navbar  navbar-expand-lg navbar-light bg-light">
+﻿<nav class="navbar navbar-expand-lg navbar-custom">
     <div class="container">
-        <a class="navbar-brand" href="/">Logo</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="/">OyunicinOyuncu</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+                aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mr-auto mx-auto">
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
+                    <a class="nav-link" href="/">Ana Sayfa</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="/Oyunlar">Oyunlar</a>
                 </li>
                 <li class="nav-item">
@@ -15,32 +18,34 @@
                 </li>
             </ul>
         </div>
-
-        <div class="navbar-collapse collapse order-3 dual-collapse2">
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 
             @if (User.Identity.IsAuthenticated)
             {
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Profil/@User.Identity.Name">@User.Identity.Name</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/User/Logout">Çıkış</a>
-                    </li>
-                </ul>
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/Profil/@User.Identity.Name">@User.Identity.Name</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/User/Logout">Çıkış</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Panel">Panel</a>
+                </li>
+            </ul>
             }
             else
             {
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">Giriş Yap</a>
+
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/login">Giriş Yap <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/register">Kayıt Ol</a>
                     </li>
                 </ul>
             }
-
         </div>
     </div>
 </nav>

@@ -10,6 +10,8 @@ namespace Web.DataAccess.Abstract
     {
         Advert GetAdvertWithGames(int id);
         void UpdateAdvert(AdvertModelView model);
-        
+        ContentAdvert GetAdvertContent(int id);
+        List<ProfileAdvert> GetPRofileAdvert(string id);
+
     }
 }

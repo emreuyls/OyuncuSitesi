@@ -3,128 +3,97 @@
     ViewData["Title"] = "AdvertContent";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<section>
+<section class="custom-section">
     <div class="container">
         <div class="row">
-           
-            <div class="col-lg-4">
-                <div class="game-card">
-                    <div class="game-header">
-                        <div class="game-img">
-                            <img src="/img/game/@Model.ContentGame.Img" alt="cs go" srcset="">
-                        </div>
-                        <div class="game-info">
-                            <h5>@Model.ContentGame.Name</h5>
-                            <p>
-                               @Model.ContentGame.Description
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                @await Component.InvokeAsync("GameInfoComponent", new { gamename = ViewBag.GameName })
             </div>
-            <div class="col-lg-8">
+            <div class="col-lg-8 col-md-8 col-sm-12">
                 <div class="row">
-                    <div class="col-lg-6">
-                        <div class="advert-info">
-                            <div class="card">
-                                <div class="card-header">İlan Bilgileri</div>
-                                <div class="card-body">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <th>Nick:</th>
-                                                <td>@Model.ContentAdvert.Nick</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Rütbe</th>
-                                                <td>
-                                                    @foreach (var rank in ViewBag.RankBag)
-                                                    {
-                                                        if (rank.ID.ToString() == Model.ContentAdvert.Rank)
-                                                            @rank.Ranks
-                                                        }
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>Rol:</th>
-                                                <td>
-                                                    @foreach (var role in ViewBag.RolesBag)
-                                                    {
-                                                        if (role.ID.ToString() == Model.ContentAdvert.Role)
-                                                            @role.Role
-                                                        }
-
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    Aradığı Rol
-                                    <ul>
-                                        @foreach (var role in Model.ContentAdvert.SeekRole)
-                                        {
-                                            foreach (var rolelist in ViewBag.RolesBag)
-                                            {
-                                                if (role == rolelist.ID)
-                                                {
-                                                    <li><span class="badge badge-pill badge-dark">@rolelist.Role</span></li>
-                                                }
-                                            }
-                                        }
-                                    </ul>
-                                    Aradığı Rank
-                                    <ul>
-                                        @foreach (var rank in Model.ContentAdvert.SeekRank)
-                                        {
-                                            foreach (var ranklist in ViewBag.RankBag)
-                                            {
-                                                if (rank == ranklist.ID)
-                                                {
-                                                    <li><span class="badge badge-pill badge-dark">@ranklist.Ranks</span></li>
-                                                }
-                                            }
-                                        }
-                                    </ul>
-                                </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="card card-advert-content">
+                            <div class="card-header card-header-custom">
+                                İlan Bilgileri
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="advert-profile">
-                            <div class="card">
-                                <div class="card-header">
-                                    İlan Yayıncı Profili
-                                </div>
-                                <div class="card-body">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <th>Kullanıcı Adı:</th>
-                                                <td>@Model.ContentUser.Username</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Yaş:</th>
-                                                <td>@(DateTime.Now.Year-Model.ContentUser.BirthDate.Year)</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Cinsiyet</th>
-                                                <td>@((Model.ContentUser.Gender ==true)?"Erkek":"Kadın")</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>                                  
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-header">Açıklama</div>
                             <div class="card-body">
-                               @Model.ContentAdvert.Content
+                                <table class="table table-datail">
+                                    <tr>
+                                        <td>Nick</td>
+                                        <td>@Model.ContentAdvert.Nick</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Rütbe</td>
+                                        <td>@Model.ContentAdvert.Rank</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Rol</td>
+                                        <td>@Model.ContentAdvert.Role</td>
+                                    </tr>
+                                </table>
+                                <div class="advert-info-tag">
+                                    <div class="seek-role">
+                                        <p>Aranan Rol</p>
+                                        <ul>
+                                            @foreach (var role in Model.ContentAdvert.SeekRole)
+                                            {
+                                                <li>@role.Roles.Role</li>
+                                            }
+                                        </ul>
+                                    </div>
+                                    <div class="seek-rank">
+                                        <p>Aranan Rütbe</p>
+                                        <ul>
+                                            @foreach (var rank in Model.ContentAdvert.SeekRank)
+                                            {
+                                                <li>@rank.Rank.Ranks</li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="card card-advert-profile">
+                            <div class="card-header card-header-custom">
+                                Profil Bilgileri
+                            </div>
+                            <table class="table table-datail">
+                                <tr>
+                                    <td>Kullanıcı Adı</td>
+                                    <td>@Model.ContentUser.Username</td>
+                                </tr>
+                                <tr>
+                                    <td>İsim Soyisim</td>
+                                    <td>@Model.ContentUser.NameSurname</td>
+                                </tr>
+                                <tr>
+                                    <td>Yaş</td>
+                                    <td>@((DateTime.Now.Year)-(Model.ContentUser.BirthDate.Year))</td>
+                                </tr>
+                                <tr>
+                                    <td>Cinsiyet</td>
+                                    <td>@(Model.ContentUser.Gender==true?"Erkek":"Kadın")</td>
+                                </tr>
+                            </table>
+                            <div class="card-adver-profile-link">
+                                <a href="/Profil/@Model.ContentUser.Username" class="btn btn-first">Profile Git</a>
+                                <a href="#" class="btn btn-first">Mesaj Gönder</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card card-statement w-100">
+                        <div class="card-header">
+                            Açıklamas
+                        </div>
+                        <div class="card-body">
+                            @Model.ContentAdvert.Content
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

@@ -46,6 +46,11 @@ namespace Web.Business
                 Discord = user.Result.Discord,
                 TeamSpeak = user.Result.TeamSpeak
             };
+            var adverts= repo.Advert.GetPRofileAdvert(user.Result.Id);
+            if(adverts!=null)
+            {
+                model.Adverts = adverts;
+            }
             return model;
         }
 
@@ -196,6 +201,27 @@ namespace Web.Business
             }
             message.AddErrors(ErrorMessageCode.PlatformUpdateError, "Kayıt Başarısız");
             return message;
+        }
+
+        public async Task<bool> UploadImage(string imagename,string userid)
+        {
+            try
+            {
+                if (imagename != null && userid != null)
+                {
+                    var user = await userManager.FindByIdAsync(userid);
+                    user.Image = imagename;
+                     var control= await userManager.UpdateAsync(user);
+                    return control.Succeeded;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        
+            return false;
         }
     }
 }

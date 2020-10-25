@@ -1,0 +1,145 @@
+$main-color: #021f59;
+$second-color: #144673;
+$third-color: #05aff2;
+$text-color: #dfedf2;
+$text-color2: #05c7f2;
+$font: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+.advert-table {
+  text-align: center;
+  color: $second-color;
+  font-family: $font;
+  tr:nth-child(even) {
+    background-color: $text-color;
+  }
+  tr {
+    td:nth-child(2) {
+      max-width: 200px;
+      text-align: left;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+.advert-card {
+  padding: 20px;
+  ul {
+    list-style: none;
+    li {
+      display: inline;
+      padding: 0.1rem;
+    }
+    li:last-child {
+      color: $text-color2;
+      font-size: 18px;
+    }
+  }
+}
+@media (min-width: 500px) and (max-width: 768px) {
+  .advert-card {
+    margin: 40px 0;
+  }
+  .advert-table {
+    tr {
+      td:nth-child(2) {
+        max-width: 100px;
+        text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}
+.advert-header {
+  h3 {
+    display: inline;
+    color: $second-color;
+    font-family: $font;
+    font-style: italic;
+  }
+}
+/**new advert2**/
+
+/*radio btn begin*/
+.advert-radio-group {
+  text-align: center;
+
+  .advert-radio-btn {
+    position: relative;
+    display: inline-block;
+    border-radius: 30px;
+    width: 200px;
+    height: 200px;
+    input[type="radio"] {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      z-index: 99;
+      &:checked + .radio-front {
+        background-color: $third-color;
+        span {
+          color: $text-color;
+          transform: translateY(30px);
+          &:before {
+            transform: translateY(0px);
+            opacity: 1;
+          }
+        }
+        .radio-icon {
+          opacity: 1;
+          transform: translateY(60px);
+        }
+      }
+    }
+  }
+  .radio-front {
+    position: absolute;
+    top: 0;
+    border-radius: 30px;
+    left: 0;
+    height: 200px;
+    width: 200px;
+    background-color: $second-color;
+    z-index: 1;
+    transition: all 250ms ease;
+    will-change: transition;
+    text-align: center;
+    font-family: $font;
+    font-weight: bold;
+    font-size: 18px;
+    overflow: hidden;
+
+    .radio-text {
+      position: absolute;
+      color: $text-color2;
+      transform: translate(0, 100px);
+      left: 0;
+      right: 0;
+
+      transition: all 300ms ease;
+    }
+
+    .radio-icon {
+      transform: translate(0, -80px);
+      transition: all 300ms ease;
+      opacity: 0;
+      &::before {
+        content: "";
+        opacity: 0;
+        display: block;
+        transition: all 300ms ease-in-out;
+      }
+    }
+  }
+}
+/*radio btn end*/
+.advert-form {
+  label {
+    color: $second-color;
+    font-family: $font;
+    font-style: italic;
+    font-weight: bold;
+  }
+}

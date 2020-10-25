@@ -3,27 +3,59 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <section>
-
     <div class="container">
-        <div class="row">
-
-            @foreach (var game in Model)
-            {
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="game-card card">
-                        <img class="game-card-img" src="/img/game/@game.Img" alt="cs go">
-                        <div class="game-card-footer" style="        overflow: hidden;
-                                    display: -webkit-box;
-                                    -webkit-line-clamp: 6;
-                                    -webkit-box-orient: vertical;
-                            ">
-                            <a href="/Oyunlar/@game.Name" class="text-break">@game.Description</a>
+        <div class="game">
+            <div class="game-head">
+                <h4>Oyunlar</h4>
+                <div class="game-filter-bar game-head-right">
+                    <select class="form-control list-custom" id="game-tag-list">
+                        <option disabled selected>Oyun Türü</option>
+                        <option>Hepsi</option>
+                        <option>FPS</option>
+                    </select>
+                    <form class="form-inline game-head-right game-form">
+                        <input type="text" id="game-search" class="form-control search-text" placeholder="Oyun Ara">
+                    </form>
+                </div>
+            </div>
+            <hr class="game-hr">
+            <div class="row">
+                @foreach (var game in Model)
+                {
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-6 col-p game-field" id="game-cards">
+                        <div class="game-card card">
+                            <div class="card-img">
+                                <img class="game-img img-fluid" src="/img/game/@game.Img" alt="">
+                            </div>
+                            <a href="/Oyunlar/@game.Name">
+                                <div class="card-information" id="card-information">
+                                    <h5 id="game-name">@game.Name</h5>
+                                    <ul class="game-card-list">
+                                        @foreach (var tag in game.GameTags)
+                                        {
+                                            <li>@tag.Tags.Tag</li>
+                                        }
+                                    </ul>
+                                </div>
+                            </a>
                         </div>
                     </div>
-                </div>
-            }
+                }
+
+            </div>
+
         </div>
     </div>
 </section>
+<script>
+    $(document).ready(function () {
+        $("#game-search").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#game-cards h5").filter(function () {
+                $(this).parents('.game-field').toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+</script>

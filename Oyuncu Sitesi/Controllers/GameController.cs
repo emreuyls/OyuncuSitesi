@@ -21,7 +21,7 @@ namespace Oyuncu_Sitesi.Controllers
         [Route("Oyunlar")]
         public IActionResult Index()
         {
-            var model=manager.GetAll();
+            var model = manager.GameList();
             return View(model);
         }
 
@@ -30,13 +30,10 @@ namespace Oyuncu_Sitesi.Controllers
         {
 
             var model = manager.GetGameListByID(name);
-
-            var Ranklist = manager.GetRoles(model.Select(x=>x.ID).FirstOrDefault());
+            var Ranklist = manager.GetRoles(model.Select(x => x.ID).FirstOrDefault());
             ViewBag.RankList = Ranklist;
-            if (model != null&&model.Any())
+            if (model != null && model.Any())
                 return View(model);
-
-            //TODO: gelen rütbelerin string olarak id kayıtlı onları string cevir string olan rankı rank ile ilişki yapılabilinirmi ?
             return NotFound();
         }
     }

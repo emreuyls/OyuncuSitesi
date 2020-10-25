@@ -18,6 +18,12 @@ namespace Web.Core.Message
 
         //Profile 2..
         ProfileUpdate=201,
+        ProfileImageSuccess = 202,
+        ProfileImageError =203,
+
+        //admin
+        AddRoleSuccess=301,
+        AddRoleError=302,
 
     }
 }

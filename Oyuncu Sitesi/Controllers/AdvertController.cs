@@ -40,15 +40,12 @@ namespace Oyuncu_Sitesi.Controllers
             List<AdvertListModelView> model= manager.GetUserAdvert(userID);
             return View(model);
         }
-        [Route("ilan/{id}")]
+        [Route("ilan/{gamename}/{id}")]
         [HttpGet]
-        public IActionResult AdvertContent(int id)
+        public IActionResult AdvertContent(string gamename, int id)
         {
             var model=manager.GetAdvertContent(id);
-            var role = manager.GetRoles(model.ContentGame.ID);
-            var rank = manager.GetRank(model.ContentGame.ID);
-            ViewBag.RolesBag = role;
-            ViewBag.RankBag = rank;
+            ViewBag.GameName =gamename;
             if(model !=null)
                 return View(model);
             return NotFound();
@@ -67,10 +64,11 @@ namespace Oyuncu_Sitesi.Controllers
         {
        
             var role = manager.GetRoles(id);
-            var rank = manager.GetRank(id);
-            
+            var rank = manager.GetRank(id);            
             ViewBag.RolesBag = new SelectList(role, "ID", "Role");
             ViewBag.RankBag = new SelectList(rank, "ID", "Ranks");
+            var game = manager.GetGameByID(id);
+            ViewBag.GameBag = game;
             ViewBag.GameID = id;
             return View();
         }

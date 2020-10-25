@@ -3,21 +3,57 @@
     ViewData["Title"] = "NewAdvert";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<section>
+<section class="custom-section">
     <div class="container">
-        <div class="row">
-            @foreach (var game in Model)
-            {
-            <div class="col-lg-3 col-md-6">
-                <div class="game-card">
-                    <a href="/İlan/Yeni/Bilgiler/@game.ID"><img class="game-card-img" src="/img/game/@game.Img" alt="@game.Name" ></a>
-                </div>
+        <div class="advert-header">
+            <span class="info-icon"></span>
+            <h3>İlan vermek İçin Bir Oyun Seçiniz</h3>
+        </div>
+        <hr class="game-hr">
+        <div class="game-list">
+            <div class="row">
+                @foreach (var game in Model)
+                {
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-6 col-p">
+                        <div class="game-card card">
+                            <div class="card-img">
+                                <img class="game-img img-fluid" src="/img/game/@game.Img" alt="@game.Name">
+                            </div>
+                            <a href="/İlan/Yeni/Bilgiler/@game.ID">
+                                <div class="card-information">
+                                    <h5>@game.Name</h5>
+                                    <ul class="game-card-list">
+                                        <li>Fps</li>
+                                        <li>Çevrimiçi</li>
+                                        <li>Taktiksel</li>
+                                        <li>Rekabetçi</li>
+                                        <li>E-Spor</li>
+                                        <li>E-Spor</li>
+                                        <li>E-Spor</li>
+                                        <li>E-Spor</li>
+                                        <li>E-Spor</li>
+                                        <li>E-Spor</li>
+                                        <li>E-Spor</li>
+                                        <li>E-Spor</li>
+                                        <li>E-Spor</li>
+                                        <li>E-Spor</li>
+                                    </ul>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                }
+
+
             </div>
-            }
-       
         </div>
     </div>
+    </div>
 </section>
+
+
+
+
 <script>
     $(function () {
         $(".single-select").removeAttr("multiple");

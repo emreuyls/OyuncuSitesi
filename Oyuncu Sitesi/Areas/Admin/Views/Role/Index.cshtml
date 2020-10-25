@@ -1,0 +1,52 @@
+﻿@model  List<MainRoleModelView>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    int rownumber = 1;
+}
+<div class="main-panel">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="card">
+                @if (TempData["message"] != null)
+                {
+                    <div class="alert alert-warning" role="alert">
+                      @TempData["message"]
+                    </div>
+                }
+                <div class="card-header">
+                    <div class="card-title">Mevcut Roller</div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Rol Adı</th>
+                                <th scope="col">Role ID</th>
+                                <th scope="col">-</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var role in Model)
+                            {
+                                <tr>
+                                    <td>@(rownumber++)</td>
+                                    <td style="font-weight:bold">@role.RoleName</td>
+                                    <td>@role.RoleID</td>
+                                    <td><a href="/Panel/Rol/@role.RoleID" class="btn btn-primary btn-round">Düzenle</a></td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                    <a onclick="showInPopup('/admin/role/CreateOrUpdateRole',' Yeni Rol')" class="btn btn-primary btn-border">Yeni Rol Oluştur</a>
+                    <a onclick="showInPopup('@Url.Action("DeleteRole","Role")',' Yeni Rol')" class="btn btn-danger btn-border">Rol Sil</a>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@await Html.PartialAsync("_ModalPartialView")

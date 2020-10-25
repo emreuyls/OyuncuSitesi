@@ -14,6 +14,6 @@ namespace Web.Entity
         public List<Advert> Adverts { get; set; }
         public List<GameRole> GameRoles { get; set; }
         public List<GameRank> GameRanks { get; set; }
-
+        public List<GameTags> GameTags { get; set; }
     }
 }

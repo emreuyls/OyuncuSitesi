@@ -13,11 +13,10 @@ namespace Web.DataAccess.EntityFramework
 
         }     
         public DbSet<Games> Games { get; set; }
-        public DbSet<GameTypes> GameTypes { get; set; }
         public DbSet<Advert> Adverts { get; set; }
         public DbSet<Roles> Roles { get; set; }
         public DbSet<Rank> Rank { get; set; }
-
+        public DbSet<Tags> Tags { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -26,6 +25,7 @@ namespace Web.DataAccess.EntityFramework
             modelBuilder.Entity<AdvertRole>().HasKey(pk => new { pk.AdvertID, pk.RolesID });
             modelBuilder.Entity<GameRank>().HasKey(pk => new { pk.GamesID, pk.RankID });
             modelBuilder.Entity<AdvertRank>().HasKey(pk => new { pk.AdvertID, pk.RankID });
+            modelBuilder.Entity<GameTags>().HasKey(pk => new { pk.GamesID, pk.TagsID });
         }
 
     }

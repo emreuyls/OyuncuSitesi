@@ -23,12 +23,24 @@ namespace Web.DataAccess.EntityFramework
 
         }
 
+        public List<GameModelView> GameList()
+        {
+            var model=databaseContext.Games.Include(a => a.GameTags).ThenInclude(a => a.Tags).Select(a => new GameModelView() {
+            Description=a.Description,
+            GameTags=a.GameTags,
+            Img=a.Img,
+            Name=a.Name,
+            ID=a.ID
+            }).ToList();
+            return model;
+        }
+
         public IEnumerable<GameAdvertListModelView> GetGameAdvertList(string name)
         {
 
             var model = databaseContext.Games.Where(x => x.Name == name).Include(a => a.Adverts).Select(a => new GameAdvertListModelView()
             {
-                Advert = a.Adverts.ToList(),
+                Advert=a.Adverts,
                 Description = a.Description,
                 ID = a.ID,
                 Img = a.Img,
@@ -37,5 +49,34 @@ namespace Web.DataAccess.EntityFramework
             //TODO: Rütbe sayı olarak Geliyor Onu Yazısal Bir Biçime Çevirmek Lazım
             return model;
         }
+
+        public Games GetGameWithTags(int id)
+        {
+            var model = databaseContext.Games.Where(x => x.ID == id).Include(a => a.GameTags).ThenInclude(a => a.Tags).Select(a => new Games()
+            {
+                Description = a.Description,
+                GameTags = a.GameTags,
+                Img = a.Img,
+                Name = a.Name,
+                ID = a.ID,
+            }).FirstOrDefault();
+            
+            return model;
+        }
+
+        public Games GetGameWithTags(string gamename)
+        {
+            var model = databaseContext.Games.Where(x => x.Name == gamename).Include(a => a.GameTags).ThenInclude(a => a.Tags).Select(a => new Games()
+            {
+                Description = a.Description,
+                GameTags = a.GameTags,
+                Img = a.Img,
+                Name = a.Name,
+                ID = a.ID,
+            }).FirstOrDefault();
+
+            return model;
+        }
+
     }
 }

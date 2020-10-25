@@ -1,0 +1,118 @@
+$main-color: #021f59;
+$second-color: #144673;
+$third-color: #05aff2;
+$text-color: #dfedf2;
+$text-color2: #05c7f2;
+.custom-section {
+  margin: 40px 0;
+}
+.game-hr {
+  background-color: $text-color;
+}
+.list-custom {
+  border-radius: 25px;
+  border-color: $second-color;
+}
+.search-btn {
+  background: url(/img/svg/search.svg) no-repeat center;
+  height: 25px;
+}
+.search-text {
+  border-color: white;
+  border-bottom: 1px solid $second-color;
+}
+.search-text:focus {
+  outline: none !important;
+  border: 1px solid $second-color !important;
+  box-shadow: none;
+}
+.btn-first {
+  background-color: $second-color;
+  color: $text-color2;
+  padding: 5px 15px;
+  border-radius: 20px;
+}
+.btn-first:hover {
+  background-color: $third-color;
+  color: $text-color;
+}
+.back-card {
+  -webkit-box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.75);
+}
+.info-icon {
+  background: url(/img/svg/information-sign.svg) no-repeat;
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  filter: invert(18%) sepia(17%) saturate(6952%) hue-rotate(190deg)
+    brightness(93%) contrast(85%);
+}
+.icon {
+  display: inline-block;
+  height: 25px;
+  width: 25px;
+  padding-right: 20px;
+}
+.icon-discord {
+  background: url(/img/svg/discord.svg) no-repeat;
+  background-size: contain;
+}
+.icon-teamspeak {
+  background: url(/img/svg/teamspeak.svg) no-repeat;
+  background-size: contain;
+}
+.icon-steam {
+  background: url(/img/svg/steam.svg) no-repeat;
+  background-size: contain;
+}
+.icon-origin {
+  background: url(/img/svg/origin.svg) no-repeat;
+  background-size: contain;
+}
+.icon-battlenet {
+  background: url(/img/svg/battle.net.svg) no-repeat;
+  background-size: contain;
+}
+.icon-epicgames {
+  background: url(/img/svg/epic-games.svg) no-repeat;
+  background-size: contain;
+}
+.icon-xbox {
+  background: url(/img/svg/xbox.svg) no-repeat;
+  background-size: contain;
+}
+.icon-playstation {
+  background: url(/img/svg/playstation.svg) no-repeat;
+  background-size: contain;
+}
+.icon-nintendo {
+  background: url(/img/svg/nintendo.svg) no-repeat;
+  background-size: contain;
+}
+.icon-uplay {
+  background: url(/img/svg/ubisoft.svg) no-repeat;
+  background-size: contain;
+}
+.icon-gamefriend {
+  background: url(/img/svg/gamer-boy.svg) no-repeat;
+  background-size: contain;
+  display: inline-block;
+  height: 75px;
+  width: 75px;
+}
+.icon-teammate{
+  background: url(/img/svg/gamer-group.svg) no-repeat;
+  background-size: contain;
+  display: inline-block;
+  height: 75px;
+  width: 75px;
+}
+.change-img-icon{
+  background: url(/img/svg/change-img.svg) no-repeat;
+  background-size: contain;
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+}

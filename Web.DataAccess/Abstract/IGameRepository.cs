@@ -7,8 +7,12 @@ using Web.Entity.ModelView;
 
 namespace Web.DataAccess.Abstract
 {
-   public interface IGameRepository : IBaseRepository<Games>
+    public interface IGameRepository : IBaseRepository<Games>
     {
-      IEnumerable<GameAdvertListModelView> GetGameAdvertList(string name);
+        IEnumerable<GameAdvertListModelView> GetGameAdvertList(string name);
+        Games GetGameWithTags(int id);
+        Games GetGameWithTags(string gamename);
+
+       List<GameModelView> GameList();
     }
 }

@@ -1,0 +1,119 @@
+$main-color: #021f59;
+$second-color: #144673;
+$third-color: #05aff2;
+$text-color: #dfedf2;
+$text-color2: #05c7f2;
+$font: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+.advert-game-card {
+  .advert-game-img {
+    position: relative;
+    padding-top: 10px;
+    margin: auto;
+
+    img {
+      height: 350px;
+      width: 275px;
+      object-fit: cover;
+    }
+  }
+  .advert-game-statement {
+    color: $second-color;
+    h5 {
+      margin: 20px 0px;
+      text-align: left;
+      padding-left: 30px;
+      font-family: $font;
+      font-style: italic;
+      font-weight: bold;
+    }
+    .card-game-tag {
+      ul {
+        list-style: none;
+        li {
+          display: inline-block;
+          border: 2px solid $second-color;
+          background-color: $text-color2;
+          color: $second-color;
+          padding: 2px 8px;
+          margin: 2px 0px;
+          border-radius: 20px;
+          flex-wrap: wrap;
+        }
+      }
+    }
+    p {
+      padding: 30px;
+    }
+  }
+}
+
+.card-advert-content {
+  .card-body {
+    .advert-info-tag {
+      position: relative;
+      p {
+        font-weight: bold;
+        font-size: 18px;
+        border-bottom: 1px solid $text-color;
+      }
+      .seek-role {
+        ul {
+          padding: 3px;
+          list-style: none;
+        }
+        display: inline-block;
+        height: 100%;
+        width: 50%;
+      }
+      .seek-rank {
+        ul {
+          padding: 3px;
+          list-style: none;
+        }
+        position: absolute;
+        display: inline-block;
+        height: 100%;
+        width: 50%;
+      }
+    }
+  }
+}
+.card-header-custom {
+  background-color: $text-color;
+  color: $second-color;
+  font-family: $font;
+  font-weight: bold;
+  font-style: italic;
+}
+.table-datail {
+  td:first-child {
+    font-weight: bold;
+  }
+}
+.card-advert-profile {
+  height: 100%;
+  .card-header {
+    background-color: $text-color;
+    color: $second-color;
+    font-family: $font;
+    font-weight: bold;
+    font-style: italic;
+  }
+  .card-adver-profile-link {
+    position: relative;
+    margin: auto;
+    a {
+      margin: 5px;
+    }
+  }
+}
+.card-statement {
+  margin: 15px;
+  .card-header {
+    background-color: $text-color;
+    color: $second-color;
+    font-family: $font;
+    font-weight: bold;
+    font-style: italic;
+  }
+}

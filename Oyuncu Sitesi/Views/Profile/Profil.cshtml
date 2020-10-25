@@ -3,93 +3,134 @@
     ViewData["Title"] = "Profil";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<section>
+<section class="custom-section">
     <div class="container">
         <div class="row">
-            <div class="test col-lg-3 col-md-4 col-6">
-                <div class="profile-img">
-                    <img src="/img/profile1.jpeg" alt="profile">
+            <div class="col-3">
+                <div class="card profile-card">
+                    <div class="profil-card-img">
+                        <img src="/img/profil/@Model.Image">
+                        @if (User.Identity.Name == Model.Username)
+                        {
+                    <a onclick="showInPopup('@Url.Action("UploadImage","Profile",null,Context.Request.Scheme)','Profil Değiştir')" class="change-images">  <span class="change-img-icon icon"></span></a>
+                        }
+                    </div>
+                    <div class="profil-card-content">
+                        <h5>@Model.Names</h5>
+                        <p><i class="fas fa-map-marker-alt"></i> @Model.City</p>
+                        <p><i class="fas fa-birthday-cake"></i> @Model.Birthdate.ToString("dd-MM-yyyy")</p>
+                        <hr class="game-hr">
+                        @if (User.Identity.Name == Model.Username)
+                        {
+                            <a href="/ayarlar" class="btn btn-first btn-block"><i class="fas fa-cog"></i> Ayarlar</a>
+                            <a href="#" class="btn btn-first btn-block"><i class="far fa-envelope"></i> Mesaj Kutum</a>
+                        }
+                        else
+                        {
+                            <a href="#" class="btn btn-first btn-block"><i class="far fa-envelope"></i> Mesaj Gönder</a>
+                        }
+                        <hr class="game-hr">
+                        <h6>Hakkında</h6>
+                        <p id="profile-statement">
+                            @Model.Statement
+                        </p>
+                        <a id="profile-statement-a" href="#">Devamını Gör</a>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg 9">
-                <div class="profile-head">
-                    <h3>@Model.Username</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> @Model.City</p>
-                    <h6>Rütbe</h6>
-                    <a class="btn btn-warning"><i class="far fa-envelope"></i>Mesaj Yolla</a>
-                    @if(User.Identity.Name==Model.Username)
-                    {
-                    <a href="/ayarlar" class="btn btn-warning"><i class="far fa-envelope"></i>Ayarlar</a>
-                    }
-                </div>
-                <div class="profile-body">
-                    <!-- Nav tabs -->
-
-                    <div id="jquery-tabs" style="width:auto">
-
-                        <div id="tabs-nav">
-                            <a href="#tab0" class="tabs-menu tabs-menu-active">Hakkında</a>
-                            <a href="#tab1" class="tabs-menu">Hesaplar</a>
-                        </div>
-
-                        <div class="tabs-container">
-                            <div id="tab0" class="tabs-panel" style="display:block">
-                                <div class="profile-about">
-                                    <ul>
-                                        <li>
-                                            <span>Adı Soyadı:</span>
-                                            <span>@Model.Names</span>
-                                        </li>
-                                        <li>
-                                            <span>Doğum Tarihi:</span>
-                                            <span>@Model.Birthdate</span>
-                                        </li>
-                                        <li>
-                                            <span>Varsa Diğer Bilgiler:</span>
-                                            <span>Kızlı Anime Sevici</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div id="tab1" class="tabs-panel">
-                                <div class="profile-account">
-                                    <ul>
-                                        <li>
-                                            <a href="#">Tinder</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Steam</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Discord</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                        </div>
+            <div class="col-9">
+                <div asp-validation-summary="All"></div>
+                <div class="card card-links">
+                    <h5>Hesaplar</h5>
+                    <hr class="game-hr">
+                    <div class="link-list">
+                        <ul>
+                            <li><a href="#"> <span class="icon icon-discord"></span> Discord</a></li>
+                            <li><a href="#"><span class="icon icon-teamspeak"></span>TeamSpeak</a></li>
+                            <li><a href="#"><span class="icon icon-steam"></span>Steam</a></li>
+                            <li><a href="#"><span class="icon icon-origin"></span>Origin</a></li>
+                            <li><a href="#"><span class="icon icon-battlenet"></span>Battlenet</a></li>
+                            <li><a href="#"><span class="icon icon-epicgames"></span>Epic Games</a></li>
+                            <li><a href="#"><span class="icon icon-xbox"></span>Xbox</a></li>
+                            <li><a href="#"><span class="icon icon-playstation"></span>Playstation</a></li>
+                            <li><a href="#"><span class="icon icon-nintendo"></span>Nintendo</a></li>
+                            <li><a href="#"><span class="icon icon-uplay"></span>Uplay</a></li>
+                        </ul>
                     </div>
+                </div>
+                <div class="card card-table">
+                    <h5>İlanları</h5>
+                    <hr class="game-hr">
+                    <table class="table advert-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Oyun Adı</th>
+                                <th scope="col">İlan Türü</th>
+                                <th scope="col">İlan Tarih</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var advert in Model.Adverts)
+                            {
+                                <tr>
+                                    <th>1</th>
+                                    <td><a href="/ilan/@advert.GameName/@advert.ID">@advert.GameName</a></td>
+                                    <td>@(advert.AdType==true?"Oyun Arkadaşı":"Takım Arkadaşı")</td>
+                                    <td>@advert.Date.ToString("dd-MM-yyyy")</td>
 
+                                </tr>
+                            }
 
-
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+
     </div>
 </section>
-
-
+@if (User.Identity.Name == Model.Username)
+{
+    @await Html.PartialAsync("_ChangeImageModal")
+}
 <script>
-        $(function () {
-            $("#tabs-nav a").click(function () {
-                $("#tabs-nav a").removeClass("tabs-menu-active");
-                $(this).addClass("tabs-menu-active");
-                $(".tabs-panel").hide();
-                var tab_id = $(this).attr("href");
-                $(tab_id).fadeIn();
-                return false;
-            });
+    $(function () {
+        $("#tabs-nav a").click(function () {
+            $("#tabs-nav a").removeClass("tabs-menu-active");
+            $(this).addClass("tabs-menu-active");
+            $(".tabs-panel").hide();
+            var tab_id = $(this).attr("href");
+            $(tab_id).fadeIn();
+            return false;
         });
+    });
+
+    $(document).ready(function () {
+        showInPopup = (url, title) => {
+            $.ajax({
+                type: 'GET',
+                url: url,
+                success: function (res) {
+                    $('#img-modal .modal-body').html(res);
+                    $('#img-modal .modal-title').html(title);
+                    $('#img-modal').modal('show')
+                }
+            })
+        }
+    });
+
 </script>
+
+@*<script>
+            $(document).ready(function () {
+                $('.change-images').click(function () {
+                    var url = $('#upload-img-modal').data('url');
+                    var id = $(this).attr('data-id');
+                    $.get(url + '/' + id, function (data) {
+                        $("#upload-img-modal").html(data);
+                        $("#upload-img-modal").modal('show');
+                    });
+                });
+            });
+    </script>*@

@@ -1,0 +1,15 @@
+$main-color:#021f59;
+$second-color:#144673;
+$text-color:#dfedf2;
+.navbar-custom{
+    background-color:$main-color ;
+    a{
+        color: $text-color;
+    }
+    
+    .navbar-toggler-icon{
+        background-image: url(/img/svg/menu.svg);
+        filter: invert(99%) sepia(87%) saturate(2%) hue-rotate(153deg) brightness(110%) contrast(98%);
+        
+    }
+}

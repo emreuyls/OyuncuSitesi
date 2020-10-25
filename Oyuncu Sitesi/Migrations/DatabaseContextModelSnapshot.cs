@@ -29,6 +29,9 @@ namespace Oyuncu_Sitesi.Migrations
                     b.Property<DateTime>("AdDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("AdType")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
@@ -117,19 +120,19 @@ namespace Oyuncu_Sitesi.Migrations
                     b.ToTable("GameRole");
                 });
 
-            modelBuilder.Entity("Web.Entity.GameTypes", b =>
+            modelBuilder.Entity("Web.Entity.GameTags", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("GamesID")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Types")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("TagsID")
+                        .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.HasKey("GamesID", "TagsID");
 
-                    b.ToTable("GameTypes");
+                    b.HasIndex("TagsID");
+
+                    b.ToTable("GameTags");
                 });
 
             modelBuilder.Entity("Web.Entity.Games", b =>
@@ -181,6 +184,21 @@ namespace Oyuncu_Sitesi.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("Web.Entity.Tags", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Tag")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("Web.Entity.Advert", b =>
@@ -246,6 +264,21 @@ namespace Oyuncu_Sitesi.Migrations
                     b.HasOne("Web.Entity.Roles", "Roles")
                         .WithMany("GameRoles")
                         .HasForeignKey("RolesID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Web.Entity.GameTags", b =>
+                {
+                    b.HasOne("Web.Entity.Games", "Games")
+                        .WithMany("GameTags")
+                        .HasForeignKey("GamesID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Web.Entity.Tags", "Tags")
+                        .WithMany("GameTags")
+                        .HasForeignKey("TagsID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

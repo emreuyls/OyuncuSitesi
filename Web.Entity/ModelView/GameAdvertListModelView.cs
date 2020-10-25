@@ -14,3 +14,11 @@ namespace Web.Entity.ModelView
         public List<Advert> Advert { get; set; }
     }
 }
+//public class GameAdvertList
+//{
+//    public int ID { get; set; }
+//    public string Nick { get; set; }
+//    public string Age { get; set; }
+//    public string Rank { get; set; }
+//    public bool AdType { get; set; }
+//}

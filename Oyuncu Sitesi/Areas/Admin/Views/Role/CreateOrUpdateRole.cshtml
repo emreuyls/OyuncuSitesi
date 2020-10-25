@@ -1,0 +1,19 @@
+﻿@model AddRoleModelView
+@{
+    Layout = null;
+}
+<div asp-validation-summary="All"></div>
+<form asp-action="CreateOrUpdateRole" method="post" enctype="multipart/form-data" onsubmit="return jQueryAjaxPost(this)"> 
+    <div class="card">
+        <div class="card-body">
+            <div class="form-group">
+                <label for="pillInput">Rol Adı</label>
+                <input asp-for="RoleName" type="text" class="form-control input-pill" placeholder="Role Giriniz">
+            </div>
+        </div>
+        <div class="card-action">
+            <button type="submit" class="btn btn-success">Ekle</button>
+            <button class="btn btn-danger" data-dismiss="modal">İptal</button>
+        </div>
+    </div>
+</form>

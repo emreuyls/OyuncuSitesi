@@ -1,0 +1,42 @@
+$main-color: #021f59;
+$second-color: #144673;
+$third-color: #05aff2;
+$text-color: #dfedf2;
+$text-color2: #05c7f2;
+$font: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+.profil-nav-card{
+    
+    height: 100%;
+}
+.profil-nav{
+    li{
+        background-color: $second-color;
+        margin: 20px;
+        border-radius: 20px;
+        a{
+            color:$text-color;
+            font-size: 1.2rem;
+            svg{
+                margin-right: .6rem;
+            }
+        }
+        .active
+        {
+            background-color: $third-color;         
+            border-radius: 20px;
+        }
+    }
+}
+.profil-form{
+    label{
+        color: $second-color;
+        font-family: $font;
+        font-weight: bold;
+    }
+    h5{
+        color: $second-color;
+        font-family: $font;
+        font-style: italic;
+    }
+}

@@ -24,7 +24,7 @@ namespace Web.Business
         public AdvertManager(IUnitOfWork _repo, UserManager<ApplicationUser> _userManager)
         {
             repo = _repo;
-             userManager = _userManager;
+            userManager = _userManager;
         }
 
         public List<Games> GetGame()
@@ -32,21 +32,30 @@ namespace Web.Business
             return repo.Games.GetAll().ToList();
 
         }
+        public Games GetGameByID(int id)
+        {
+            return repo.Games.GetGameWithTags(id);
+        }
+        public Games GetGameByID(string gamename)
+        {
+            return repo.Games.GetGameWithTags(gamename);
+        }
         public List<RolesAdvert> GetRoles(int id)
         {
             //var test=repo.Roles.GetRolesWithGamesID(id);
             //return test;
-            return repo.Roles.GetRolesWithGamesID(id); 
+            return repo.Roles.GetRolesWithGamesID(id);
         }
         public List<RankAdvert> GetRank(int id)
         {
             return repo.Ranks.GetRankWithGamesID(id);
         }
 
-        public void CreateAdvert(AdvertModelView model,string userID,int id)
+        public void CreateAdvert(AdvertModelView model, string userID, int id)
         {
-            var games=repo.Games.Get(id);
-            var advert = new Advert() {
+            var games = repo.Games.Get(id);
+            var advert = new Advert()
+            {
                 AdDate = DateTime.Now,
                 Content = model.Content,
                 MinAge = model.MinAge,
@@ -54,40 +63,40 @@ namespace Web.Business
                 Rank = model.Rank,
                 UserID = userID,
                 Games = games,
-                Role=model.Role
-                
-                
+                Role = model.Role,
+                AdType=model.AdType,
             };
             List<AdvertRank> advertrank = new List<AdvertRank>();
-            
+
             for (int i = 0; i < model.SeekRank.Count(); i++)
             {
                 advertrank.Add(new AdvertRank { Advert = advert, RankID = model.SeekRank[i] });
             }
             List<AdvertRole> advertrole = new List<AdvertRole>();
-                for (int i = 0; i < model.SeekRole.Count(); i++)
+            for (int i = 0; i < model.SeekRole.Count(); i++)
             {
-             advertrole.Add( new AdvertRole { Advert = advert, RolesID = model.SeekRole[i] });
+                advertrole.Add(new AdvertRole { Advert = advert, RolesID = model.SeekRole[i] });
             }
-            advert.AdvertRoles=advertrole;
+            advert.AdvertRoles = advertrole;
             advert.AdvertRanks = advertrank;
             repo.Advert.Create(advert);
         }
-        
+
         public List<AdvertListModelView> GetUserAdvert(string Userid)
         {
 
-            var AdvertList = repo.Advert.Find(x => x.UserID == Userid).Select(a=>new AdvertListModelView() { 
-            AdDate=a.AdDate,
-            Game=a.Games.Name,
-            Nick=a.Nick,
-            ID=a.ID
+            var AdvertList = repo.Advert.Find(x => x.UserID == Userid).Select(a => new AdvertListModelView()
+            {
+                AdDate = a.AdDate,
+                Game = a.Games.Name,
+                Nick = a.Nick,
+                ID = a.ID
             }).ToList();
 
 
             return AdvertList;
         }
-        public bool CheckUserID(string userid,int id)
+        public bool CheckUserID(string userid, int id)
         {
             try
             {
@@ -102,8 +111,8 @@ namespace Web.Business
             {
 
                 return false;
-            }               
-            
+            }
+
             return false;
         }
 
@@ -141,7 +150,7 @@ namespace Web.Business
                 return null;
         }
 
-        public bool AdvertUpdate(AdvertModelView model,int id)
+        public bool AdvertUpdate(AdvertModelView model, int id)
         {
             try
             {
@@ -177,15 +186,15 @@ namespace Web.Business
 
                 return false;
             }
-            
+
         }
 
         public bool AdvertDeleteAll(int id)
         {
             try
             {
-            var advert=repo.Advert.GetAdvertWithGames(id);
-            int Control=repo.Advert.Delete(advert);
+                var advert = repo.Advert.GetAdvertWithGames(id);
+                int Control = repo.Advert.Delete(advert);
                 if (Control >= 1)
                     return true;
                 else
@@ -196,34 +205,34 @@ namespace Web.Business
             {
 
                 return false;
-            }          
+            }
         }
 
-        public  AdvertContentModelView GetAdvertContent(int id)
+        public AdvertContentModelView GetAdvertContent(int id)
         {
 
-            var advert=repo.Advert.GetAdvertWithGames(id);
-            var user = userManager.FindByIdAsync(advert.UserID);
-            AdvertContentModelView model = new AdvertContentModelView()
+            try
             {
-                ContentAdvert=new ContentAdvert{AdDate=advert.AdDate,MinAge=advert.MinAge,Content=advert.Content,Nick=advert.Nick,Rank=advert.Rank,Role=advert.Role},
-                ContentGame=new ContentGame { Description=advert.Games.Description,Img=advert.Games.Img,Name=advert.Games.Name,ID=advert.Games.ID},
-                ContentUser=new ContentUser {Username=user.Result.UserName,Gender=user.Result.Gender,Img=user.Result.Image,BirthDate=user.Result.Birthdate}
-                
-            };
-            List<int> seekRole = new List<int>();
-            foreach (var role in advert.AdvertRoles)
-            {
-                seekRole.Add(role.RolesID);
+                var advert = repo.Advert.GetAdvertContent(id);
+                if(advert!=null)
+                {
+                var user = userManager.FindByIdAsync(advert.UserID);
+                AdvertContentModelView model = new AdvertContentModelView()
+                {
+                    ContentAdvert = advert,
+                    ContentUser = new ContentUser { Username = user.Result.UserName, Gender = user.Result.Gender, Img = user.Result.Image, BirthDate = user.Result.Birthdate,NameSurname=user.Result.Names }
+                };
+                    return model;
+                }
+
+                return null;
             }
-            model.ContentAdvert.SeekRole = seekRole.ToArray();
-            List<int> seekRank = new List<int>();
-            foreach (var rank in advert.AdvertRanks)
+            catch (Exception)
             {
-                seekRank.Add(rank.RankID);
+
+                throw;
             }
-            model.ContentAdvert.SeekRank = seekRank.ToArray();
-            return model;
+            
         }
     }
 }

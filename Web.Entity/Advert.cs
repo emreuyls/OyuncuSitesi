@@ -13,6 +13,7 @@ namespace Web.Entity
         public string MinAge { get; set; } 
         public string Role { get; set; } //ya aradığı yada oynadığı rol olabilir
         public string Content { get; set; }
+        public bool AdType { get; set; }
         public DateTime AdDate { get; set; }
         public Games Games { get; set; }
 

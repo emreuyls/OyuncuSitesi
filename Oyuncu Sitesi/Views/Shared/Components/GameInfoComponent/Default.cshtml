@@ -1,0 +1,22 @@
+﻿@model Games
+<div class="card advert-game-card">
+    <div class="advert-game-img">
+        <img src="/img/game/@Model.Img">
+    </div>
+    <div class="advert-game-statement">
+        <h5>@Model.Name</h5>
+        <hr class="game-hr">
+        <div class="card-game-tag">
+            <ul>
+                @foreach (var tags in Model.GameTags)
+                {
+                    <li>@tags.Tags.Tag</li>
+                }
+            </ul>
+            <hr class="game-hr">
+        </div>
+        <p>
+            @Model.Description
+        </p>
+    </div>
+</div>

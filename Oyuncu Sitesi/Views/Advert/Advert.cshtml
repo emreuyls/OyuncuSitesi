@@ -2,41 +2,49 @@
 @{
     ViewData["Title"] = "Advert";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int count = 1;
 }
-<section>
+<section class="custom-section">
     <div class="container">
         <div class="row">
-            <div class="col-lg-10 col-md-10">
-
-
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Oyun Adı</th>
-                            <th scope="col">Nick</th>
-                            <th scope="col">Oluşturulma Tarihi</th>
-                            <th scope="col">-</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var advert in Model)
-                        {
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>@advert.Game</td>
-                            <td>@advert.Nick</td>
-                            <td>@advert.AdDate</td>
-                            <td><a href="/ilan/düzenle/@advert.ID" class="badge badge-info"><span class="fas fa-edit"></span>Düzenle</a></td>
-                            @*<td><a href="#"><span class="fas fa-edit"></span></a><i class="fas fa-trash-alt"></i></td>*@
-                        </tr>
-                        }
+            <div class="col-lg-9 col-md-9 col-sm-12">
+                <div class="card back-card">
+                    <table class="table advert-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Oyun Adı</th>
+                                <th scope="col">Oyun Nick'i</th>
+                                <th scope="col">Oluşturulma Tarihi</th>
+                                <th scope="col">-</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var advert in Model)
+                            {
+                                <tr>
+                                    <th scope="row">@(count++)</th>
+                                    <td>@advert.Game</td>
+                                    <td>@advert.Nick</td>
+                                    <td>@advert.AdDate.ToString("dd/MM/yyyy")</td>
+                                    <td><a class="btn btn-first" href="/ilan/düzenle/@advert.ID">Düzenle</a></td>
+                                </tr>
+                            }
                         </tbody>
-                </table>
-
+                    </table>
+                </div>
             </div>
-            <div class="col-lg-2 col-md-2">
-                <a href="/ilan/Yeni" class="btn btn-success btn-block">Yeni İlan Ver</a>
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <div class="card advert-card back-card">
+                    <div class="advert-card-text">
+                        <ul>
+                            <li>Mevcut İlan</li>
+                            <li>@Model.Count()</li>
+                        </ul>
+                        <hr class="game-hr">
+                    </div>
+                    <a class="btn btn-first" href="/ilan/yeni">Yeni İlan</a>
+                </div>
             </div>
         </div>
     </div>

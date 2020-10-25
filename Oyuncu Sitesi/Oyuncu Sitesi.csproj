@@ -18,8 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="wwwroot\img\profil\" />
     <Folder Include="wwwroot\lib\" />
-    <Folder Include="wwwroot\img\" />
     <Folder Include="wwwroot\scss\" />
   </ItemGroup>
 

@@ -27,7 +27,8 @@ namespace Web.Entity.ModelView
         [Required(ErrorMessage = "{0} Boş Bırakılamaz")]
         public string Role { get; set; }
         public DateTime AdDate { get; set; }
-
+        [Required(ErrorMessage ="{0} Seçiniz"),Display(Name ="İlan Türü")]
+        public bool AdType { get; set; }
         public Games GameModels { get; set; }
 
 

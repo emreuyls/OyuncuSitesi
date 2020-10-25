@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Web.Entity;
 
 namespace Web.Entity.ModelView
 {
@@ -22,6 +23,13 @@ namespace Web.Entity.ModelView
         public string XboxLink { get; set; }
         public string Discord { get; set; }
         public string TeamSpeak { get; set; }
-
+        public List<ProfileAdvert> Adverts { get; set; }
     }
+}
+public class ProfileAdvert
+{
+    public int ID { get; set; }
+    public string GameName { get; set; }
+    public bool AdType { get; set; }
+    public DateTime Date { get; set; }
 }

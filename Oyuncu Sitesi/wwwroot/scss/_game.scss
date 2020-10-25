@@ -1,20 +1,108 @@
-.game-card{
-    height: 100%;
-    padding: 0px 10px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+$main-color: #021f59;
+$second-color: #144673;
+$text-color: #dfedf2;
+$font: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+.game {
+  padding-top: 5%;
+  h4 {
+    font-family: $font;
+    display: inline-block;
+    font-style: italic;
+    color: $second-color;
+  }
 }
-.game-img{
-    img{
+.game-head {
+  .game-head-right {
+    float: right;
+
+    .list-custom {
+      margin-right: 40px;
+      display: inline-block;
+      width: 300px;
+    }
+  }
+}
+.col-p{
+  padding-bottom: 15px;
+}
+.game-card {
+  width: 100%;
+  height: 340px;
+  overflow: hidden;
+  a{
+    color: $text-color;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 0.5s ease;
+    background-color: rgba(0, 0, 0, 0.5);
+    transform: translateY(-100%);
+    z-index: 1;
+  }
+  .card-information {
+    position: absolute;
+    height:100%;
+    margin: 10px;
+    transition: all 0.5s ease;
+    top: -220px;
+    z-index: 3;
+   .game-card-list{
+    list-style: none;
+    height: 140px;
+    overflow: hidden;
+   }
+    
+  }
+  &:hover {
+    &::after {
+      content: "";
+      transform: translateY(0%);
+    }
+    a{
+        text-decoration: none;
+    }
+    .card-information {
+      position: absolute;
+      color: $text-color;
+      top: 20px;
+    }
+  }
+}
+.card-img{
+    height: 100%;
+    .game-img {
         width: 100%;
         height: 100%;
-       object-fit: cover;
-    }
+        object-fit: cover;
+      }
 }
-.game-info{
-    p{
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 10;
-        -webkit-box-orient: vertical;
+
+
+@media (min-width: 500px) and (max-width: 768px) {
+  .game-head {
+    display: block;
+    .game-head-right {
+      float: none;
+      .list-custom {
+        display: block;
+        width: 100%;
+        margin: 30px 0;
+      }
+      form {
+        flex-flow: nowrap !important;
+        .search-text {
+          display: inline-block;
+          width: 100%;
+        }
+        button {
+          display: inline-block;
+        }
+      }
     }
+  }
 }

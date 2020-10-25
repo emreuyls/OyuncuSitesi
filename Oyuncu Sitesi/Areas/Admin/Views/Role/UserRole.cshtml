@@ -1,0 +1,152 @@
+﻿@model AdminRoleUserModelView
+@{
+    ViewData["Title"] = "UserRole";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Kullanıcı Arama</div>
+                        </div>
+                        <div class="card-body">
+                            <form asp-action="GetRoleUser" method="post" onsubmit="return AdminUserForm(this)">
+                                <div class="form-group">
+                                    <label for="email">Kullanıcı Adı</label>
+                                    <input type="text" class="form-control" id="searchname" name="searchname" placeholder="Enter Email">
+                                    <small id="emailHelp" class="form-text text-muted">Kullanıcı Nick'i Yazınız</small>
+
+                                </div>
+                                <button type="submit" class="btn btn-primary">Kullanıcı Ara</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Bulunan Kullanıcı</div>
+                        </div>
+                        <div class="card-body">
+                            <div id="finding-user-table" style="display:none">
+                                <form asp-action="AddUserRole" method="post">
+
+                                    <div class="alert alert-danger" role="alert" style="display:none">
+                                    </div>
+                                    <table class="table table-hover" id="role-user-table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Kullanıcı Adı</th>
+                                                <th scope="col">Adı Soyadı</th>
+                                                <th scope="col">Rol Ata</th>
+                                            </tr>
+
+                                        </thead>
+
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <form asp-action="RemoveUserRole" method="post">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">Role Sahip Kullanıcılar</div>
+                                <button class="btn btn-primary" type="submit">Çıkar</button>
+                                @if (TempData["message"] != null)
+                                {
+                                    <div class="alert alert-warning" role="alert">
+                                        @TempData["message"]
+                                    </div>
+                                }
+                                <input type="hidden" value="@Model.Role.Id" id="RoleID" name="RoleID" />
+                                <input type="hidden" value="@Model.Role.Name" id="RoleName" name="RoleName" />
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Nick</th>
+                                            <th scope="col">Ad Soyad</th>
+                                            <th scope="col">Rol</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var user in Model.User)
+                                        {
+                                            <tr>
+                                                <td>1</td>
+                                                <td>@user.Id</td>
+                                                <td>@user.UserName</td>
+                                                <td>@user.Names</td>
+                                                <td>
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" name="IdtoRemove" id="IdtoRemove" type="checkbox" value="@user.Id">
+                                                        <span class="form-check-sign">Çıkar</span>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        }
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    AdminUserForm = form => {
+        try {
+            $.ajax({
+                type: 'POST',
+                url: form.action,
+                data: new FormData(form),
+                contentType: false,
+                processData: false,
+                success: function (res) {
+                    if (res.success) {
+                        $('#finding-user-table tbody tr').remove();
+                        $("#finding-user-table").show()
+                        let tr = $('<tr>')
+                        let td1 = $('<td id="roleuserid" name="roleuserid">').text(res.data.id)
+                        let td2 = $("<td>").text(res.data.name)
+                        let td3 = $("<td>").text(res.data.nick)
+                        let td4 = $('<td>').html('<a onclick="transferUser()" class="btn btn-primary btn-border btn-round">Aktar</a>')
+                        tr.append(td1);
+                        tr.append(td2);
+                        tr.append(td3);
+                        tr.append(td4);
+                        $("#role-user-table").append(tr);
+                        $("#searchname").parent().addClass("has-success");
+                    }
+                    else {
+                        $("#searchname").parent().addClass("has-error has-feedback");
+                    }
+                },
+                error: function (err) {
+                    $("#searchname").parent().addClass("has-error has-feedback");
+                }
+            })
+            return false;
+        } catch (ex) {
+            console.log(ex)
+        }
+    }
+</script>
