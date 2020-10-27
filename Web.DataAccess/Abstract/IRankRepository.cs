@@ -10,5 +10,7 @@ namespace Web.DataAccess.Abstract
     {
         List<RankAdvert> GetRankWithGamesID(int id);
         List<Rank> GetGameRankListByID(int id);
+        bool FindRank(Rank rank);
+        bool DeleteRankByID(List<Rank> ranklist);
     }
 }

@@ -128,8 +128,7 @@
         });
         function displayValidationErrors(errors) {
             $.each(errors, function (idx, validationError) {
-                $("span[data-valmsg-for='" + validationError.PropertyName + "']").text(validationError.ErrorList[0]);
-                //TODO: errorlar kalıcı ve sayfa reload atıyor yönlendirme işini yap
+                $("span[data-valmsg-for='" + validationError.PropertyName + "']").text(validationError.ErrorList[0]);                
             });
         }
     });

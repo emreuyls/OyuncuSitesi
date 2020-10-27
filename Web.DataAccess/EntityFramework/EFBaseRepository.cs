@@ -49,7 +49,7 @@ namespace Web.DataAccess.EntityFramework
             return context.SaveChanges();
         }
      
-        public int Update(T entity)
+        public  int Update(T entity)
         {
             context.Entry<T>(entity).State = EntityState.Modified;
             return save();

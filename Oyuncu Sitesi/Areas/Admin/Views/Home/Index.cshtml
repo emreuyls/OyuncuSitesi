@@ -1,4 +1,4 @@
-﻿
+﻿@model PanelModelView
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -22,7 +22,7 @@
                                 <div class="col-7 d-flex align-items-center">
                                     <div class="numbers">
                                         <p class="card-category">Kayıtlı Kullanıcı</p>
-                                        <h4 class="card-title">1,294</h4>
+                                        <h4 class="card-title">@Model.TotalUser</h4>
                                     </div>
                                 </div>
                             </div>
@@ -35,13 +35,13 @@
                             <div class="row">
                                 <div class="col-5">
                                     <div class="icon-big text-center">
-                                        <i class="la la-bar-chart"></i>
+                                        <i class="la la-gamepad"></i>
                                     </div>
                                 </div>
                                 <div class="col-7 d-flex align-items-center">
                                     <div class="numbers">
                                         <p class="card-category">Kayıtlı Oyun</p>
-                                        <h4 class="card-title">$ 1,345</h4>
+                                        <h4 class="card-title">@Model.TotalGame</h4>
                                     </div>
                                 </div>
                             </div>
@@ -54,13 +54,13 @@
                             <div class="row">
                                 <div class="col-5">
                                     <div class="icon-big text-center">
-                                        <i class="la la-newspaper-o"></i>
+                                        <i class="la la-user-plus"></i>
                                     </div>
                                 </div>
                                 <div class="col-7 d-flex align-items-center">
                                     <div class="numbers">
                                         <p class="card-category">Bugün Kayıt Olan</p>
-                                        <h4 class="card-title">1303</h4>
+                                        <h4 class="card-title">@Model.RegisteredToday</h4>
                                     </div>
                                 </div>
                             </div>
@@ -78,8 +78,8 @@
                                 </div>
                                 <div class="col-7 d-flex align-items-center">
                                     <div class="numbers">
-                                        <p class="card-category">bişe bul</p>
-                                        <h4 class="card-title">576</h4>
+                                        <p class="card-category">Toplam İlan Sayısı</p>
+                                        <h4 class="card-title">@Model.TotalAdvert</h4>
                                     </div>
                                 </div>
                             </div>

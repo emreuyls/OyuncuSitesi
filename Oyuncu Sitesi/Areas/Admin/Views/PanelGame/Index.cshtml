@@ -1,0 +1,85 @@
+﻿@model PanelGameMainModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="main-panel">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Oyun Rolleri</div>
+                        </div>
+                        <div class="card-body">
+                            <p>Top,Bottom,Middle V.B.</p>
+                            <p>Belirlenmiş Oyunun Rolleri</p>
+                            <a href="/Panel/Oyunlar/Rol" class="btn btn-info btn-block">Git</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Oyun Etiketleri</div>
+                        </div>
+                        <div class="card-body">
+                            <p> FPS,MMORPG,MOBA V.B.</p>
+                            <p>Belirlenmiş Oyunun Etiketleri</p>
+                            <a href="/Panel/Oyunlar/Etiket" class="btn btn-info btn-block">Git</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Oyun Rütbeleri</div>
+                        </div>
+                        <div class="card-body">
+
+                            <p>Gümüş,Altın Nova,Bronz V.B.</p>
+                            <p>Belirlenmiş Oyunun Rütbeleri</p>
+
+                            <a href="/Panel/Oyunlar/Rütbe" class="btn btn-info btn-block">Git</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Oyunlar</div>
+                    <hr />
+                    <a href="/Panel/Oyunlar/Yeni" class="btn btn-success">Oyun Ekle</a>
+                </div>
+                <div class="card-body">
+                    <table id="paneltable" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Oyunun Adı</th>
+                                <th scope="col">-</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var game in Model.Games)
+                            {
+                                <tr>
+
+                                    <td>@game.ID</td>
+                                    <td>@game.Name</td>
+                                    <td><a href="/Panel/Oyunlar/@game.Name" class="btn btn-primary btn-sm">Güncelle</a></td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

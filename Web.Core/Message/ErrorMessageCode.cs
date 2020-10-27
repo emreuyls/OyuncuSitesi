@@ -24,6 +24,8 @@ namespace Web.Core.Message
         //admin
         AddRoleSuccess=301,
         AddRoleError=302,
+        AddGameSuccess=303,
+        AddGameError=304,
 
     }
 }

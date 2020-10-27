@@ -1,0 +1,76 @@
+﻿@model PanelSidebarModel
+<div class="sidebar">
+    <div class="scrollbar-inner sidebar-wrapper">
+        <div class="user">
+            <div class="photo">
+                <img src="/img/profil/@Model.Img">
+            </div>
+            <div class="info">
+                <a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+                    <span>
+                        @User.Identity.Name
+                        <span class="user-level">@Model.Role</span>
+                        <span class="caret"></span>
+                    </span>
+                </a>
+                <div class="clearfix"></div>
+
+                <div class="collapse in" id="collapseExample" aria-expanded="true" style="">
+                    <ul class="nav">
+                        <li>
+                            <a href="#profile">
+                                <span class="link-collapse">My Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#edit">
+                                <span class="link-collapse">Edit Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#settings">
+                                <span class="link-collapse">Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <ul class="nav">
+            <li class="nav-item">
+                <a href="/Panel">
+                    <i class="la la-dashboard"></i>
+                    <p>Dashboard</p>
+                    <span class="badge badge-count">5</span>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a href="/Panel/Oyunlar">
+                    <i class="la la-gamepad"></i>
+                    <p>Oyunlar</p>
+                </a>
+            </li>
+            @if (User.IsInRole("Yönetici"))
+            {
+                <li class="nav-item ">
+                    <a href="/Panel/Rol">
+                        <i class="la la-user-secret"></i>
+                        <p>Roller</p>
+                    </a>
+                </li>
+            }
+            <li class="nav-item ">
+                <a href="/">
+                    <i class="la la-angle-double-left"></i>
+                    <p>Geri Dön</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a href="/User/Logout">
+                    <i class="la la-sign-out"></i>
+                    <p>Çıkış</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

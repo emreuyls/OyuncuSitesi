@@ -1,0 +1,72 @@
+﻿@model PanelGameTagModelView
+@{
+    ViewData["Title"] = "PanelGameTags";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    int tagcounter = 1;
+}
+
+
+
+<div class="main-panel">
+    <div class="content">
+        <div class="container-fluid">
+
+            @if (TempData["message"] != null)
+            {
+                <div class="alert alert-warning" role="alert">
+                    @TempData["message"]
+                </div>
+            }
+            <form asp-action="DeleteTag" method="post">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Etiketler</div>
+                        <hr />
+                        <a onclick="showInPopup('@Url.Action("AddTag","PanelGame")',' Yeni Etiket Ekle')" class="btn btn-default">Etiket Ekle</a>
+                        <button id="role-delete-btn" type="button" class="btn btn-danger">Etiket Silmeyi Aç</button>
+                        <button type="submit" class="btn btn-success float-right">Değişiklikleri Kaydet</button>
+                    </div>
+                    <div class="card-body">
+                        <table id="paneltable" class="table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Etiket Adı</th>
+                                    <th scope="col">-</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var tag in Model.Tags)
+                                {
+                                    <tr>
+                                        <td>@(tagcounter++)</td>
+                                        <td>@tag.ID</td>
+                                        <td>@tag.Tag</td>
+                                        <td>
+                                            <a  onclick="showInPopup('@Url.Action("UpdateTag","PanelGame",new {ID=tag.ID })','Etiket Güncelle')" class="btn btn-default btn-xs role-update-btn">Güncelle</a>
+                                            <label class="form-check-label delete-check" style="display:none">
+                                                <input class="form-check-input" id="TagID" name="TagID" type="checkbox" value="@tag.ID">
+                                                <span class="form-check-sign">Sil</span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@await Html.PartialAsync("_ModalPartialView")
+<script>
+    $(document).ready(function () {
+        $("#role-delete-btn").click(function () {
+            $(".delete-check").toggle();
+            $(".role-update-btn").toggle();
+        });
+
+    });
+</script>

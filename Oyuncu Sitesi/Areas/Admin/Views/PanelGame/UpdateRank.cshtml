@@ -1,0 +1,21 @@
+﻿@model PanelGameExtraModel
+@{
+    Layout = null;
+}
+<form asp-action="UpdateRank" method="post" onsubmit="return jQueryAjaxPost(this)">
+    <div asp-validation-summary="All"></div>
+    <div class="card">
+        <div class="card-body">
+            <div class="form-group">
+                <input type="hidden" asp-for="ID"  />
+                <label for="squareInput">Etiket Adı</label>
+                <input type="text" class="form-control input-square" asp-for="Name" placeholder="@ViewBag.Rank">
+            </div>
+
+            <div class="card-action">
+                <button class="btn btn-success">Güncelle</button>
+                <button class="btn btn-danger" data-dismiss="modal">İptal</button>
+            </div>
+        </div>
+    </div>
+</form>

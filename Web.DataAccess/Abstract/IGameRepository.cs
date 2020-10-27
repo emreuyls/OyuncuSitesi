@@ -12,7 +12,9 @@ namespace Web.DataAccess.Abstract
         IEnumerable<GameAdvertListModelView> GetGameAdvertList(string name);
         Games GetGameWithTags(int id);
         Games GetGameWithTags(string gamename);
+        Games FindGameWithAll(string gamename);
+        Games FindGameWithAllByID(int ID);
 
-       List<GameModelView> GameList();
+        List<GameModelView> GameList();
     }
 }

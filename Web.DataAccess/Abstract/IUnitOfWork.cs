@@ -10,6 +10,7 @@ namespace Web.DataAccess.Abstract
         IRolesRepository Roles { get; }
         IRankRepository Ranks { get; }
         IAdvertRepository Advert { get; }
+        ITagRepository Tag { get; }
         int SaveChanges();
     }
 }

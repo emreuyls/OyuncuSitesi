@@ -1,0 +1,73 @@
+﻿@model PanelGameRankModelView
+@{
+    ViewData["Title"] = "PanelGameRanks";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    int rankcounter = 1;
+}
+
+
+
+
+<div class="main-panel">
+    <div class="content">
+        <div class="container-fluid">
+
+            @if (TempData["message"] != null)
+            {
+                <div class="alert alert-warning" role="alert">
+                    @TempData["message"]
+                </div>
+            }
+            <form asp-action="DeleteRank" method="post">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Rütbeler</div>
+                        <hr />
+                        <a onclick="showInPopup('@Url.Action("AddRank","PanelGame")',' Yeni Rank Ekle')" class="btn btn-default">Rütbe Ekle</a>
+                        <button id="role-delete-btn" type="button" class="btn btn-danger">Rütbe Silmeyi Aç</button>
+                        <button type="submit" class="btn btn-success float-right">Değişiklikleri Kaydet</button>
+                    </div>
+                    <div class="card-body">
+                        <table id="paneltable" class="table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Rütbe Adı</th>
+                                    <th scope="col">-</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var rank in Model.Ranks)
+                                {
+                                    <tr>
+                                        <td>@(rankcounter++)</td>
+                                        <td>@rank.ID</td>
+                                        <td>@rank.Ranks</td>
+                                        <td>
+                                            <a onclick="showInPopup('@Url.Action("UpdateRank","PanelGame",new {ID=rank.ID })','Rütbe Güncelle')" class="btn btn-default btn-xs role-update-btn">Güncelle</a>
+                                            <label class="form-check-label delete-check" style="display:none">
+                                                <input class="form-check-input" id="RankID" name="RankID" type="checkbox" value="@rank.ID">
+                                                <span class="form-check-sign">Sil</span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@await Html.PartialAsync("_ModalPartialView")
+<script>
+    $(document).ready(function () {
+        $("#role-delete-btn").click(function () {
+            $(".delete-check").toggle();
+            $(".role-update-btn").toggle();
+        });
+
+    });
+</script>

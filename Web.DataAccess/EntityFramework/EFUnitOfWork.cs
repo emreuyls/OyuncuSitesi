@@ -17,6 +17,7 @@ namespace Web.DataAccess.EntityFramework
         private IRolesRepository _role;
         private IRankRepository _rank;
         private IAdvertRepository _advert;
+        private ITagRepository _tag;
         public IGameRepository Games
         {
             get { return _games ?? (_games = new EFGameRepository(dbContext)); }
@@ -33,6 +34,10 @@ namespace Web.DataAccess.EntityFramework
         public IRankRepository Ranks
         {
             get { return _rank ?? (_rank = new EFRankRepository(dbContext)); }
+        }
+        public ITagRepository Tag
+        {
+            get { return _tag ?? (_tag = new EFTagRepository(dbContext)); }
         }
         public void Dispose()
         {

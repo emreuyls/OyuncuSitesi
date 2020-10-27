@@ -38,7 +38,7 @@
 
                                     <div class="alert alert-danger" role="alert" style="display:none">
                                     </div>
-                                    <table class="table table-hover" id="role-user-table">
+                                    <table  class="table table-hover" id="role-user-table ">
                                         <thead>
                                             <tr>
                                                 <th scope="col">ID</th>
@@ -73,7 +73,7 @@
                                 <input type="hidden" value="@Model.Role.Name" id="RoleName" name="RoleName" />
                             </div>
                             <div class="card-body">
-                                <table class="table table-hover">
+                                <table class="table table-hover table-striped table-bordered" id="paneltable">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
@@ -89,7 +89,7 @@
                                             <tr>
                                                 <td>1</td>
                                                 <td>@user.Id</td>
-                                                <td>@user.UserName</td>
+                                                <td style="font-weight:bolder">@user.UserName</td>
                                                 <td>@user.Names</td>
                                                 <td>
                                                     <label class="form-check-label">

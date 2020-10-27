@@ -14,11 +14,14 @@
                       @TempData["message"]
                     </div>
                 }
-                <div class="card-header">
-                    <div class="card-title">Mevcut Roller</div>
-                </div>
+            <div class="card-header">
+                <div class="card-title">Mevcut Roller</div>
+                <hr />
+                <a onclick="showInPopup('/admin/role/CreateOrUpdateRole',' Yeni Rol')" class="btn btn-primary btn-border">Yeni Rol Oluştur</a>
+                <a onclick="showInPopup('@Url.Action("DeleteRole","Role")',' Yeni Rol')" class="btn btn-danger btn-border float-right">Rol Sil</a>
+            </div>
                 <div class="card-body">
-                    <table class="table table-hover">
+                    <table class="table table-striped table-bordered" id="paneltable">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -40,8 +43,7 @@
 
                         </tbody>
                     </table>
-                    <a onclick="showInPopup('/admin/role/CreateOrUpdateRole',' Yeni Rol')" class="btn btn-primary btn-border">Yeni Rol Oluştur</a>
-                    <a onclick="showInPopup('@Url.Action("DeleteRole","Role")',' Yeni Rol')" class="btn btn-danger btn-border">Rol Sil</a>
+                  
 
 
                 </div>

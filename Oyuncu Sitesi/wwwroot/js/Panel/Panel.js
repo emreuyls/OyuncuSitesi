@@ -10,9 +10,37 @@
                 $('#panel-modal').modal('show')
             }
         });
-    };
+    }; 
+        $('#paneltable').DataTable({
+            language: {
+            info: "_TOTAL_ kayıttan _START_ - _END_ kayıt gösteriliyor.",
+                infoEmpty:      "Gösterilecek hiç kayıt yok.",
+                loadingRecords: "Kayıtlar yükleniyor.",
+                zeroRecords: "Tablo boş",
+                search: "Arama:",
+                sLengthMenu: "Sayfada _MENU_ Sırala",
+                infoFiltered:   "(toplam _MAX_ kayıttan filtrelenenler)",
+                buttons: {
+            copyTitle: "Panoya kopyalandı.",
+                    copySuccess:"Panoya %d satır kopyalandı",
+                    copy: "Kopyala",
+                    print: "Yazdır",
+                },
 
+                paginate: {
+            first: "İlk",
+                    previous: "Önceki",
+                    next: "Sonraki",
+                    last: "Son"
+                },
+            }
+        });
+});
 
+$(function () {
+    var sPath = window.location.pathname;
+    var sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
+    $('a[href="' + sPath + '"]').parent("li").addClass('active');
 });
 
 jQueryAjaxPost = form => {
@@ -28,7 +56,7 @@ jQueryAjaxPost = form => {
                     location.reload();
                 }
                 else {
-                    console.log(res);
+                  
                     $('#panel-modal .modal-body').html(res.html);
                     if (res.customerror != null) {
                         ValidationErrors(res.customerror[0]);
@@ -41,7 +69,7 @@ jQueryAjaxPost = form => {
         })
         function ValidationErrors(errors) {           
             $.each(error, function (code, msg) {
-                console.log(msg.message)
+             
                 $('.alert').alert().text(msg.message)
             });
         }
@@ -52,7 +80,7 @@ jQueryAjaxPost = form => {
 }
 
 transferUser = () => {
-    console.log("transfer button2")
+   
     var id = $("#roleuserid").html();
     var url = "/admin/role/AddUserRole";
     var rolename = $("#RoleName").val();
@@ -75,8 +103,7 @@ transferUser = () => {
     });
     function ValidationErrors(errors) {
         var error = JSON.parse(errors)
-        $.each(error, function (Code, message) {
-            console.log(message.Message)
+        $.each(error, function (Code, message) {        
             $('.alert').alert().text(message.Message)
         });
     }

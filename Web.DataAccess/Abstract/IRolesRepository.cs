@@ -9,5 +9,7 @@ namespace Web.DataAccess.Abstract
    public interface IRolesRepository:IBaseRepository<Roles>
     {
         List<RolesAdvert> GetRolesWithGamesID(int id);
+        bool FindRoles(Roles role);
+        bool DeleteRolesByID(List<Roles> role);
     }
 }

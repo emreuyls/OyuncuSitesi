@@ -23,6 +23,19 @@ namespace Web.DataAccess.EntityFramework
 
         }
 
+        public Games FindGameWithAll(string gamename)
+        {
+
+            return databaseContext.Games.Where(x => x.Name == gamename).Include(a => a.GameRanks).Include(a => a.GameRoles).Include(a => a.GameTags).FirstOrDefault();
+            
+        }
+        public Games FindGameWithAllByID(int ID)
+        {
+
+            return databaseContext.Games.Where(x => x.ID == ID).Include(a => a.GameRanks).Include(a => a.GameRoles).Include(a => a.GameTags).FirstOrDefault();
+
+        }
+
         public List<GameModelView> GameList()
         {
             var model=databaseContext.Games.Include(a => a.GameTags).ThenInclude(a => a.Tags).Select(a => new GameModelView() {

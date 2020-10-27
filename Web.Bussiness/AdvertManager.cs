@@ -178,7 +178,8 @@ namespace Web.Business
 
                 getadvert.AdvertRanks = advertRanks;
                 getadvert.AdvertRoles = advertRole;
-                repo.Advert.Update(getadvert);
+             var result= repo.Advert.Update(getadvert);
+                
                 return true;
             }
             catch (Exception)
